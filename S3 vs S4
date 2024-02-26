@@ -1,0 +1,26 @@
+# load library
+library(pryr)
+
+#load in dataset
+str(airquality)
+
+
+## Create an S3 object
+airqualityS3 <- airquality
+
+#check to see if its s3
+otype(airqualityS3)
+
+class(airqualityS3) <- "myAirQualityClass"
+
+
+# Create an S4 class definition
+setClass("AirQuality", 
+         slots = c(Ozone = "integer", Solar.R = "integer", Wind = "numeric", 
+                   Temp = "integer", Month = "integer", Day = "integer"))
+
+# Create an S4 object
+airqualityS4 <- new("AirQuality", 
+                     Ozone = airquality$Ozone, Solar.R = airquality$Solar.R, 
+                     Wind = airquality$Wind, Temp = airquality$Temp, 
+                     Month = airquality$Month, Day = airquality$Day)
